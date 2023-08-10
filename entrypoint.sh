@@ -30,6 +30,12 @@ log() {
     echo '>> [remote]' \$@ ;
 };
 
+if [ -d \$workdir ]
+then
+  log 'Deleting workspace directory...';
+  rm -rf \$workdir;
+fi
+
 log 'Creating workspace directory...';
 mkdir \$workdir;
 
@@ -46,12 +52,11 @@ then
 fi
 
 if $NO_CACHE
-  then
-    docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
-    docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate
-  else
-    docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
-  fi
+then
+  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
+  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate
+else
+  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
 fi"
 
 log "Connecting to remote host."

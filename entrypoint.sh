@@ -24,7 +24,7 @@ ssh-add <(echo "$SSH_PRIVATE_KEY")
 
 remote_command="set -e;
 
-workdir=\"$HOME/workspace\";
+workdir=\"\$HOME/workspace\";
 
 log() {
     echo '>> [remote]' \$@ ;

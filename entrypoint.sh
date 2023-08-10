@@ -43,7 +43,7 @@ if $DOCKER_COMPOSE_DOWN
 then
   log 'Executing docker-compose down...';
   docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" down
-else
+fi
 
 if $NO_CACHE
   then

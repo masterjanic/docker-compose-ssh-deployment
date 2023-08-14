@@ -22,6 +22,8 @@ unknown docker-images. It is entirely built from Dockerfile on top of
 * `no_cache` - Adds --no-cache flag to docker build command.
 * `tar_package_operation_modifiers` - Tar operation modifiers used while creating the package.
 * `docker_compose_down` - Execute docker-compose down before docker-compose up.
+* `dockerhub_username` - Username for dockerhub login.
+* `dockerhub_password` - Password for dockerhub login.
 
 # Example usage
 

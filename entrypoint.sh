@@ -42,13 +42,13 @@ mkdir \$workdir;
 log 'Unpacking workspace...';
 tar -C \$workdir -xjv;
 
-log 'Launching docker-compose...';
+log 'Launching docker compose...';
 cd \$workdir;
 
 if $DOCKER_COMPOSE_DOWN
 then
-  log 'Executing docker-compose down...';
-  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" down
+  log 'Executing docker compose down...';
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" down
 fi
 
 if [ -n \"$DOCKERHUB_USERNAME\" ] && [ -n \"$DOCKERHUB_PASSWORD\" ]
@@ -57,15 +57,15 @@ then
   docker login -u \"$DOCKERHUB_USERNAME\" -p \"$DOCKERHUB_PASSWORD\"
 fi
 
-log 'Executing docker-compose pull...';
-docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" pull
+log 'Executing docker compose pull...';
+docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" pull
 
 if $NO_CACHE
 then
-  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
-  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" build --no-cache
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --force-recreate
 else
-  docker-compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
+  docker compose -f \"$DOCKER_COMPOSE_FILENAME\" -p \"$DOCKER_COMPOSE_PREFIX\" up -d --remove-orphans --build;
 fi"
 
 log "Connecting to remote host."
